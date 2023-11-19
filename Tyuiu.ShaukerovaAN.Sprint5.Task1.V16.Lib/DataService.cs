@@ -17,18 +17,25 @@ namespace Tyuiu.ShaukerovaAN.Sprint5.Task1.V16.Lib
             string path = $@"{Directory.GetCurrentDirectory()}\OutPutFileTask1.txt";
 
             FileInfo fileInfo = new FileInfo(path);
-            bool fileExsists = fileInfo.Exists;
+            bool FileExists = fileInfo.Exists;
 
-            if (fileExsists)
+            if (FileExists)
             {
                 File.Delete(path);
             }
-
             double y;
             string strY;
+
             for (int x = startValue; x <= stopValue; x++)
             {
-                y = Math.Round(Math.Sin(x) + (2 * x / 3) - Math.Cos(x) * 4 * x, 2);
+                if (x == 0)
+                {
+                    File.AppendAllText(path, "0");
+                    continue;
+                }
+                y = Math.Sin(x) + (2 * x) / 3 - Math.Cos(x) * 4 * x;
+                y = Math.Round(y, 2);
+
                 strY = Convert.ToString(y);
 
                 if (x != stopValue)
@@ -39,6 +46,7 @@ namespace Tyuiu.ShaukerovaAN.Sprint5.Task1.V16.Lib
                 {
                     File.AppendAllText(path, strY);
                 }
+
             }
             return path;
         }
